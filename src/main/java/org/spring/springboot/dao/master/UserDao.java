@@ -21,6 +21,6 @@ public interface UserDao {
      */
     User findByName(@Param("userName") String userName);
 
-  @Insert("INSERT INTO public.user(id,user_name,description,datas) VALUES(#{id}, #{userName}, #{description}, #{datas,typeHandler=org.spring.springboot.hand.JSONTypeHandlerPg})")
-  void saveUser(User user);
+  void saveUser(@Param("user") User user,@Param("tableName") String tableName);
+
 }

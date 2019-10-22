@@ -19,20 +19,15 @@
 		where id = 1
 	</select>
 
-<!--	<insert id="saveUser"  parameterType="org.spring.springboot.domain.User">-->
-<!--		insert into public.user(<include refid="Base_Column_List" />)-->
-<!--		values (-->
-<!--		#{id,javaType=Object,jdbcType=OTHER,typeHandler=com.geovis.common.config.JSONTypeHandlerPg},-->
-<!--		#{uploadtime,jdbcType=TIMESTAMP}-->
-<!--		)-->
-<!--	</insert>-->
 
 
 
 
-<!--	<insert id="insert" parameterType="com.geovis.domain.DataObject" >-->
-<!--    insert into data_object(info,uploadtime)-->
-<!--    values (#{info,javaType=Object,jdbcType=OTHER,typeHandler=com.geovis.common.config.JSONTypeHandlerPg},#{uploadtime,jdbcType=TIMESTAMP}-->
-<!--      ) returning id-->
-<!--  </insert>-->
+	<insert id="saveUser"  parameterType="org.spring.springboot.domain.User">
+		INSERT INTO ${tableName}(id,user_name,description,datas)
+		VALUES(#{user.id,jdbcType=BIGINT}, #{user.userName,jdbcType=VARCHAR}, #{user.description,jdbcType=VARCHAR},
+		#{user.datas,typeHandler=org.spring.springboot.hand.JSONTypeHandlerPg})
+	</insert>
+
+
 </mapper>

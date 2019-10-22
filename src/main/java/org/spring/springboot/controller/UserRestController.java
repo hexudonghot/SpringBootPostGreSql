@@ -42,7 +42,7 @@ public class UserRestController {
         user.setDescription("2");
         user.setId(System.currentTimeMillis());
         user.setDatas("{\"dd\":2}");
-        userService.saveUser(user);
+        userService.saveUser(user,"public.user");
     }
 
 }
