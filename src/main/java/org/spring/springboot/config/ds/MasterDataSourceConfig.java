@@ -35,6 +35,14 @@ public class MasterDataSourceConfig {
 
     @Value("${master.datasource.driverClassName}")
     private String driverClass;
+    @Value("${master.datasource.initialSize}")
+    private int initialSize;
+    @Value("${master.datasource.maxActive}")
+    private int maxActive;
+    @Value("${master.datasource.minIdle}")
+    private int minIdle;
+
+
 
     @Bean(name = "masterDataSource")
     @Primary
@@ -44,6 +52,9 @@ public class MasterDataSourceConfig {
         dataSource.setUrl(url);
         dataSource.setUsername(user);
         dataSource.setPassword(password);
+        dataSource.setInitialSize(initialSize);
+        dataSource.setMaxActive(maxActive);
+        dataSource.setMinIdle(minIdle);
         return dataSource;
     }
 

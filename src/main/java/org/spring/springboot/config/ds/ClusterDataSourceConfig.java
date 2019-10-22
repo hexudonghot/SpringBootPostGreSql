@@ -34,6 +34,14 @@ public class ClusterDataSourceConfig {
 
     @Value("${cluster.datasource.driverClassName}")
     private String driverClass;
+    @Value("${cluster.datasource.initialSize}")
+    private int initialSize;
+    @Value("${cluster.datasource.maxActive}")
+    private int maxActive;
+    @Value("${cluster.datasource.minIdle}")
+    private int minIdle;
+
+
 
     @Bean(name = "clusterDataSource")
     public DataSource clusterDataSource() {
