@@ -29,4 +29,9 @@ public class UserServiceImpl implements UserService {
         //user.setCity(city);
         return user;
     }
+
+    @Override
+    public void saveUser(User user) {
+         userDao.saveUser(user);
+    }
 }

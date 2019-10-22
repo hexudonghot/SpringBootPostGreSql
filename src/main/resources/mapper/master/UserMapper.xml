@@ -5,10 +5,11 @@
 		<result column="id" property="id" />
 		<result column="user_name" property="userName" />
 		<result column="description" property="description" />
+		<result column="datas" property="datas" typeHandler="org.spring.springboot.hand.JSONTypeHandlerPg"/>
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id, user_name, description
+		id, user_name, description,datas
 	</sql>
 
 	<select id="findByName" resultMap="BaseResultMap" parameterType="java.lang.String">
@@ -18,4 +19,20 @@
 		where id = 1
 	</select>
 
+<!--	<insert id="saveUser"  parameterType="org.spring.springboot.domain.User">-->
+<!--		insert into public.user(<include refid="Base_Column_List" />)-->
+<!--		values (-->
+<!--		#{id,javaType=Object,jdbcType=OTHER,typeHandler=com.geovis.common.config.JSONTypeHandlerPg},-->
+<!--		#{uploadtime,jdbcType=TIMESTAMP}-->
+<!--		)-->
+<!--	</insert>-->
+
+
+
+
+<!--	<insert id="insert" parameterType="com.geovis.domain.DataObject" >-->
+<!--    insert into data_object(info,uploadtime)-->
+<!--    values (#{info,javaType=Object,jdbcType=OTHER,typeHandler=com.geovis.common.config.JSONTypeHandlerPg},#{uploadtime,jdbcType=TIMESTAMP}-->
+<!--      ) returning id-->
+<!--  </insert>-->
 </mapper>

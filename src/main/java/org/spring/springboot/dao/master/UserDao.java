@@ -1,5 +1,6 @@
 package org.spring.springboot.dao.master;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.spring.springboot.domain.User;
@@ -19,4 +20,7 @@ public interface UserDao {
      * @return
      */
     User findByName(@Param("userName") String userName);
+
+  @Insert("INSERT INTO public.user(id,user_name,description,datas) VALUES(#{id}, #{userName}, #{description}, #{datas,typeHandler=org.spring.springboot.hand.JSONTypeHandlerPg})")
+  void saveUser(User user);
 }

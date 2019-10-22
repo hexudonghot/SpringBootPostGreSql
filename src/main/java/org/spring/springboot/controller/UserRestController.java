@@ -31,4 +31,18 @@ public class UserRestController {
         return userService.findByName(userName);
     }
 
+    /**
+     * 根据用户名获取用户信息，包括从库的地址信息
+     *
+     * @return
+     */
+    @RequestMapping(value = "/api/usersave", method = RequestMethod.GET)
+    public void saveUser() {
+        User user  = new User();
+        user.setDescription("2");
+        user.setId(System.currentTimeMillis());
+        user.setDatas("{\"dd\":2}");
+        userService.saveUser(user);
+    }
+
 }

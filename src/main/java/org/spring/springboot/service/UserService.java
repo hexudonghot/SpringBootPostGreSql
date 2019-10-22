@@ -17,4 +17,6 @@ public interface UserService {
      * @return
      */
     User findByName(String userName);
+
+    void saveUser(User user);
 }
