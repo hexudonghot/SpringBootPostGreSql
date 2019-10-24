@@ -34,11 +34,8 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private CityDao cityDao; // 从数据源
-
-
     @Autowired
     JdbcTemplate jdbcTemplate;
-
     @Override
     public User findByName(String userName) {
         User user = userDao.findByName(userName);
