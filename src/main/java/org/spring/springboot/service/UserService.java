@@ -19,4 +19,6 @@ public interface UserService {
     User findByName(String userName);
 
     void saveUser(User user,String u);
+
+    void getUserCursor();
 }

@@ -45,4 +45,11 @@ public class UserRestController {
         userService.saveUser(user,"public.user");
     }
 
+
+    @RequestMapping(value = "/api/getUserCursor", method = RequestMethod.GET)
+    public void getUserCursor() {
+
+        userService.getUserCursor();
+    }
+
 }

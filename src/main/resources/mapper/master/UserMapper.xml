@@ -23,7 +23,15 @@
 
 
 
-	<insert id="saveUser"  parameterType="org.spring.springboot.domain.User">
+	<select id="getUserCursor" fetchSize="100" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" />  from public.user
+	</select>
+
+
+
+
+
+	<insert id="saveUser"    parameterType="org.spring.springboot.domain.User">
 		INSERT INTO ${tableName}(id,user_name,description,datas)
 		VALUES(#{user.id,jdbcType=BIGINT}, #{user.userName,jdbcType=VARCHAR}, #{user.description,jdbcType=VARCHAR},
 		#{user.datas,typeHandler=org.spring.springboot.hand.JSONTypeHandlerPg})
