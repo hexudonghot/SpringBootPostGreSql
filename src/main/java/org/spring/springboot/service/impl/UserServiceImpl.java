@@ -51,14 +51,14 @@ public class UserServiceImpl implements UserService {
             StringBuffer ss  =new StringBuffer();
             ss.append(" declare ");
             ss.append(cusorName);
-            ss.append(" cursor  for select id from  public.user");
+            ss.append(" cursor  for select * from  public.user");
             ss.append(" where 1=1 ");
             String  fetchSql = "FETCH " + 2 + " from  "+cusorName ;
             jdbcTemplate.execute(ss.toString());
-                  List<Long> list =     jdbcTemplate.queryForList(fetchSql,Long.class);
+                  List<User> list =     jdbcTemplate.query(fetchSql,new User());
                   while (list.size()>0)
                   {
-                      list =     jdbcTemplate.queryForList(fetchSql,Long.class);
+                      list =     jdbcTemplate.query(fetchSql,new User());
                         System.out.println(list);
                   }
 
