@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
             ss.append(cusorName);
             ss.append(" cursor  for select * from  public.user");
             ss.append(" where 1=1 ");
-            String  fetchSql = "FETCH " + 2 + " from  "+cusorName ;
+            String  fetchSql = "FETCH " + 1000 + " from  "+cusorName ;
             jdbcTemplate.execute(ss.toString());
                   List<User> list =     jdbcTemplate.query(fetchSql,new User());
                   while (list.size()>0)

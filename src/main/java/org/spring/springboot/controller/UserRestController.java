@@ -38,11 +38,14 @@ public class UserRestController {
      */
     @RequestMapping(value = "/api/usersave", method = RequestMethod.GET)
     public void saveUser() {
-        User user  = new User();
-        user.setDescription("2");
-        user.setId(System.currentTimeMillis());
-        user.setDatas("{\"dd\":2}");
-        userService.saveUser(user,"public.user");
+        for(int i=0;i<10000000;i++)
+        {
+            User user  = new User();
+            user.setDescription("2");
+            user.setId(System.currentTimeMillis());
+            user.setDatas("{\"dd\":2}");
+            userService.saveUser(user,"public.user");
+        }
     }
 
 

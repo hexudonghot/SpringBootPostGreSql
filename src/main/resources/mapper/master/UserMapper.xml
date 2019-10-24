@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.spring.springboot.dao.master.UserDao">
-	<resultMap id="BaseResultMap" type="org.spring.springboot.domain.User">
+	<resultMap id="BaseResultMap" type="org.spring.springboot.domain.u.User">
 		<result column="id" property="id" />
 		<result column="user_name" property="userName" />
 		<result column="description" property="description" />
@@ -31,7 +31,7 @@
 
 
 
-	<insert id="saveUser"    parameterType="org.spring.springboot.domain.User">
+	<insert id="saveUser"    parameterType="org.spring.springboot.domain.u.User">
 		INSERT INTO ${tableName}(id,user_name,description,datas)
 		VALUES(#{user.id,jdbcType=BIGINT}, #{user.userName,jdbcType=VARCHAR}, #{user.description,jdbcType=VARCHAR},
 		#{user.datas,typeHandler=org.spring.springboot.hand.JSONTypeHandlerPg})
