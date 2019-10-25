@@ -50,15 +50,21 @@ public class UserServiceImpl implements UserService {
             ss.append(cusorName);
             ss.append(" cursor  for select * from  public.user");
             ss.append(" where 1=1 ");
-            String  fetchSql = "FETCH " + 1000 + " from  "+cusorName ;
+            String  fetchSql = "FETCH " + 10000 + " from  "+cusorName ;
+            Long t1 = System.currentTimeMillis();
             jdbcTemplate.execute(ss.toString());
                   List<User> list =     jdbcTemplate.query(fetchSql,new User());
+                  int i=0;
                   while (list.size()>0)
                   {
+                      System.out.println("第几页：" +i++);
                       list =     jdbcTemplate.query(fetchSql,new User());
-                        System.out.println(list);
+                       if(list.size()>0)
+                           System.out.println(list.get(0).getId());
                   }
-
+            Long t2 = System.currentTimeMillis();
+            System.out.println("执行时间：" + (t2-t1));
+            jdbcTemplate.execute("close  " + cusorName );
             connection.commit();
         } catch (SQLException e) {
         } finally {
