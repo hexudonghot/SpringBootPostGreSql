@@ -1,6 +1,8 @@
 package org.spring.springboot.service.impl;
 
 import org.apache.ibatis.cursor.Cursor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.spring.springboot.dao.cluster.CityDao;
 import org.spring.springboot.dao.master.UserDao;
 import org.spring.springboot.domain.City;
@@ -29,6 +31,8 @@ import java.util.Map;
 @Service
 public class UserServiceImpl implements UserService {
 
+
+    private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
     @Autowired
     private UserDao userDao; // 主数据源
 
@@ -57,13 +61,13 @@ public class UserServiceImpl implements UserService {
                   int i=0;
                   while (list.size()>0)
                   {
-                      System.out.println("第几页：" +i++);
+                      logger.info("第几页：" +i++);
                       list =     jdbcTemplate.query(fetchSql,new User());
                        if(list.size()>0)
                            System.out.println(list.get(0).getId());
                   }
             Long t2 = System.currentTimeMillis();
-            System.out.println("执行时间：" + (t2-t1));
+            logger.info("执行时间：" + (t2-t1));
             jdbcTemplate.execute("close  " + cusorName );
             connection.commit();
         } catch (SQLException e) {
