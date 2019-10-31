@@ -27,7 +27,10 @@ public class UserRestController {
      */
     @RequestMapping(value = "/api/user", method = RequestMethod.GET)
     public User findByName() {
-         kafkaTemplate.send("fddffffff", "message");
+         for(int i=0;i<10;i++)
+         {
+             kafkaTemplate.send("fddffffff", "message");
+         }
         return null;
     }
 
