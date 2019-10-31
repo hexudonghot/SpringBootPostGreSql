@@ -26,12 +26,17 @@ public class UserRestController {
      * @return
      */
     @RequestMapping(value = "/api/user", method = RequestMethod.GET)
-    public User findByName() {
-         for(int i=0;i<10;i++)
+    public void findByName() {
+         while (true)
          {
+             try {
+                 Thread.sleep(500L);
+             } catch (InterruptedException e) {
+                 e.printStackTrace();
+             }
              kafkaTemplate.send("fddffffff", "message");
          }
-        return null;
+
     }
 
     /**
