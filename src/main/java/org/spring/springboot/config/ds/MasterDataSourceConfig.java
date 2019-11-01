@@ -1,6 +1,6 @@
 package org.spring.springboot.config.ds;
 
-import com.alibaba.druid.pool.DruidDataSource;
+import com.zaxxer.hikari.HikariDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
@@ -47,14 +47,11 @@ public class MasterDataSourceConfig {
     @Bean(name = "masterDataSource")
     @Primary
     public DataSource masterDataSource() {
-        DruidDataSource dataSource = new DruidDataSource();
+        HikariDataSource dataSource = new HikariDataSource();
         dataSource.setDriverClassName(driverClass);
-        dataSource.setUrl(url);
+        dataSource.setJdbcUrl(url);
         dataSource.setUsername(user);
         dataSource.setPassword(password);
-        dataSource.setInitialSize(initialSize);
-        dataSource.setMaxActive(maxActive);
-        dataSource.setMinIdle(minIdle);
         return dataSource;
     }
 

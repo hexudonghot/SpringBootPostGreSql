@@ -57,7 +57,7 @@ public class UserRestController {
     @RequestMapping(value = "/api/getUserCursor", method = RequestMethod.GET)
     public void getUserCursor() {
 
-        userService.getUserCursor();
+        userService.findByName("");
     }
 
 }
