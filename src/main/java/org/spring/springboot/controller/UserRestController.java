@@ -1,9 +1,11 @@
 package org.spring.springboot.controller;
 
+import javafx.scene.input.TouchEvent;
 import org.spring.springboot.domain.City;
 import org.spring.springboot.domain.User;
 import org.spring.springboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +21,8 @@ public class UserRestController {
     private UserService userService;
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     /**
      * 根据用户名获取用户信息，包括从库的地址信息
@@ -27,15 +31,8 @@ public class UserRestController {
      */
     @RequestMapping(value = "/api/user", method = RequestMethod.GET)
     public void findByName() {
-         while (true)
-         {
-             try {
-                 Thread.sleep(500L);
-             } catch (InterruptedException e) {
-                 e.printStackTrace();
-             }
-             kafkaTemplate.send("fddffffff", "message");
-         }
+        redisTemplate.opsForValue().set("aaa","dddd");
+        System.out.println(redisTemplate.opsForValue().get("aaa"));
 
     }
 
