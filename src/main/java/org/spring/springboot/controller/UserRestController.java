@@ -1,10 +1,10 @@
 package org.spring.springboot.controller;
 
-import javafx.scene.input.TouchEvent;
-import org.spring.springboot.domain.City;
+
 import org.spring.springboot.domain.User;
 import org.spring.springboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;

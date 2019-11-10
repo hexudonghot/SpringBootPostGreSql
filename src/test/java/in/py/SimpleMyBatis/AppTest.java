@@ -17,7 +17,19 @@ public class AppTest
      */
     public AppTest( String testName )
     {
-        super( testName );
+        //ThreadPoolUtil.executor(()-> this.gets());
+
+        System.out.println(1082062+1082820);
+
+    }
+
+    private String gets()
+    {
+        for(int i=0;i<100000;i++)
+        {
+
+        }
+        return "";
     }
 
     /**
