@@ -24,7 +24,7 @@ import java.net.URL;
  */
 @RestController
 public class ThreadController {
-    private RateLimiter rateLimiter = RateLimiter.create(5);
+    private RateLimiter rateLimiter = RateLimiter.create(0.2);
     static final int SIZE=2*1024*1024;
     /**
      * 根据用户名获取用户信息，包括从库的地址信息
@@ -36,7 +36,7 @@ public class ThreadController {
 
 
         rateLimiter.acquire();
-        System.out.println("1111111111111111");
+       // System.out.println("1111111111111111");
         ThreadPoolUtil.executor(()-> this.gets());
 
     }
@@ -44,12 +44,8 @@ public class ThreadController {
     private void gets()
     {
         int[] i = new int[SIZE];
-        System.out.println(i);
-        try {
-            Thread.sleep(1000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        System.out.println("Thread Name:   " +Thread.currentThread().getName());
+
 
     }
 

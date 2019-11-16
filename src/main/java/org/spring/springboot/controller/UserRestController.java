@@ -59,5 +59,12 @@ public class UserRestController {
 
         userService.findByName("");
     }
+    @RequestMapping(value = "/api/kafka", method = RequestMethod.GET)
+    public void kafka() {
+
+       while (true)
+           kafkaTemplate.send("hxd","data");
+    }
+
 
 }
