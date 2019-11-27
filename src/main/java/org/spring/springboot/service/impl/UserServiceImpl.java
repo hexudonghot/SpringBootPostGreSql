@@ -9,6 +9,7 @@ import org.spring.springboot.domain.City;
 import org.spring.springboot.domain.User;
 import org.spring.springboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.stereotype.Service;
@@ -39,7 +40,18 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private CityDao cityDao; // 从数据源
     @Autowired
+    @Qualifier("clusterJdbcTemplate")
     JdbcTemplate jdbcTemplate;
+
+
+
+
+
+
+
+
+
+
     @Override
     public User findByName(String userName) {
         User user = userDao.findByName(userName);

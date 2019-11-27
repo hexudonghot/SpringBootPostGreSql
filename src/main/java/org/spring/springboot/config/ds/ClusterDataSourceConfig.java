@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import javax.sql.DataSource;
@@ -67,4 +68,13 @@ public class ClusterDataSourceConfig {
                 .getResources(ClusterDataSourceConfig.MAPPER_LOCATION));
         return sessionFactory.getObject();
     }
+
+
+    @Bean(name = "clusterJdbcTemplate")
+    public JdbcTemplate secondaryJdbcTemplate(
+            @Qualifier("clusterDataSource") DataSource dataSource) {
+        return new JdbcTemplate(dataSource);
+    }
+
+
 }
