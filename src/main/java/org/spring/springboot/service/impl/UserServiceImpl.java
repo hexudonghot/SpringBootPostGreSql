@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.spring.springboot.dao.cluster.CityDao;
 import org.spring.springboot.dao.master.UserDao;
 import org.spring.springboot.domain.City;
+import org.spring.springboot.domain.PushUserInfo;
 import org.spring.springboot.domain.User;
 import org.spring.springboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -114,5 +115,10 @@ public class UserServiceImpl implements UserService {
 
 
         }
+    }
+
+    @Override
+    public PushUserInfo getUserById(String tableName, Long uid) {
+        return userDao.getUserById("game_user_info",10001537L);
     }
 }

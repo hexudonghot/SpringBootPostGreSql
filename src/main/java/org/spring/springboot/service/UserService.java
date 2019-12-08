@@ -1,6 +1,7 @@
 package org.spring.springboot.service;
 
 import org.spring.springboot.domain.City;
+import org.spring.springboot.domain.PushUserInfo;
 import org.spring.springboot.domain.User;
 
 /**
@@ -21,4 +22,6 @@ public interface UserService {
     void saveUser(User user,String u);
 
     void getUserCursor();
+
+    PushUserInfo getUserById(String tableName, Long uid);
 }

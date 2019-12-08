@@ -57,7 +57,7 @@ public class UserRestController {
     @RequestMapping(value = "/api/getUserCursor", method = RequestMethod.GET)
     public void getUserCursor() {
 
-        userService.findByName("");
+        System.out.println(userService.getUserById("",1L).getUid());
     }
     @RequestMapping(value = "/api/kafka", method = RequestMethod.GET)
     public void kafka() {
