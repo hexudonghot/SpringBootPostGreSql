@@ -1,29 +1,23 @@
 package org.spring.springboot.service.impl;
 
-import org.apache.ibatis.cursor.Cursor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.spring.springboot.dao.cluster.CityDao;
 import org.spring.springboot.dao.master.UserDao;
-import org.spring.springboot.domain.City;
 import org.spring.springboot.domain.PushUserInfo;
 import org.spring.springboot.domain.User;
 import org.spring.springboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.support.TransactionSynchronizationManager;
 
-import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.SQLException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 用户业务实现层
@@ -55,48 +49,30 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findByName(String userName) {
-        User user = userDao.findByName(userName);
-        TransactionSynchronizationManager.initSynchronization();
-        DataSource dataSource = jdbcTemplate.getDataSource();
-        Connection connection = DataSourceUtils.getConnection(dataSource);
-        try {
-            connection.setAutoCommit(false);
-            String cusorName="cursor_user_" + System.currentTimeMillis();
-            StringBuffer ss  =new StringBuffer();
-            ss.append(" declare ");
-            ss.append(cusorName);
-            ss.append(" cursor  for select * from  public.user");
-            ss.append(" where 1=1 ");
-            String  fetchSql = "FETCH " + 10000 + " from  "+cusorName ;
-            Long t1 = System.currentTimeMillis();
-            jdbcTemplate.execute(ss.toString());
-                  List<User> list =     jdbcTemplate.query(fetchSql,new User());
-                  int i=0;
-                  while (list.size()>0)
-                  {
-                      logger.info("第几页：" +i++);
-                      list =     jdbcTemplate.query(fetchSql,new User());
-                       if(list.size()>0)
-                           System.out.println(list.get(0).getId());
-                  }
-            Long t2 = System.currentTimeMillis();
-            logger.info("执行时间：" + (t2-t1));
-            jdbcTemplate.execute("close  " + cusorName );
-            connection.commit();
-        } catch (SQLException e) {
-        } finally {
-            try {
-                TransactionSynchronizationManager.clearSynchronization();
-            } catch (IllegalStateException e) {
-            }
-            try {
-                connection.setAutoCommit(true);
-            } catch (SQLException e) {
-            }
-        }
 
+  AtomicInteger i= new AtomicInteger();
+        Long t1  = System.currentTimeMillis();
+            jdbcTemplate.query(con -> {
+                con.setAutoCommit(false);
+                PreparedStatement preparedStatement =
+                        con.prepareStatement("select * from up_user_info",
+                                ResultSet.TYPE_FORWARD_ONLY,
+                                ResultSet.CONCUR_READ_ONLY);
+                preparedStatement.setFetchSize(1000);
+                preparedStatement.setFetchDirection(ResultSet.FETCH_FORWARD);
+                return preparedStatement;
+            }, rs -> {
+                while (rs.next()) {
+                     System.err.println(rs.getString("uid"));
+                     i.getAndIncrement();
+                }
+            });
 
-        return user;
+        Long t2  = System.currentTimeMillis();
+        System.out.println(t2-t1);
+        System.out.println(i);
+
+        return null;
     }
 
     @Override

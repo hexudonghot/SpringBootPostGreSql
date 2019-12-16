@@ -31,9 +31,7 @@ public class UserRestController {
      */
     @RequestMapping(value = "/api/user", method = RequestMethod.GET)
     public void findByName() {
-        redisTemplate.opsForValue().set("aaa","dddd");
-        System.out.println(redisTemplate.opsForValue().get("aaa"));
-
+       userService.findByName("");
     }
 
     /**
@@ -56,8 +54,17 @@ public class UserRestController {
 
     @RequestMapping(value = "/api/getUserCursor", method = RequestMethod.GET)
     public void getUserCursor() {
-
-        System.out.println(userService.getUserById("",1L).getUid());
+        while (true)
+        {
+            try
+            {
+                Thread.sleep(3000L);
+            } catch (InterruptedException e)
+            {
+                e.printStackTrace();
+            }
+            System.out.println(userService.getUserById("",1L).getSetting());
+        }
     }
     @RequestMapping(value = "/api/kafka", method = RequestMethod.GET)
     public void kafka() {
