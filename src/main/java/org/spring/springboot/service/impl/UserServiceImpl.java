@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserService {
                         con.prepareStatement("select * from up_user_info",
                                 ResultSet.TYPE_FORWARD_ONLY,
                                 ResultSet.CONCUR_READ_ONLY);
-                preparedStatement.setFetchSize(1000);
+                preparedStatement.setFetchSize(100);
                 preparedStatement.setFetchDirection(ResultSet.FETCH_FORWARD);
                 return preparedStatement;
             }, rs -> {
