@@ -97,4 +97,9 @@ public class UserServiceImpl implements UserService {
     public PushUserInfo getUserById(String tableName, Long uid) {
         return userDao.getUserById("game_user_info",10001537L);
     }
+
+    @Override
+    public void updateUser(User user) {
+        userDao.update(user);
+    }
 }

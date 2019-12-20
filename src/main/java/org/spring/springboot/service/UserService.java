@@ -24,4 +24,6 @@ public interface UserService {
     void getUserCursor();
 
     PushUserInfo getUserById(String tableName, Long uid);
+
+    void  updateUser(User user);
 }

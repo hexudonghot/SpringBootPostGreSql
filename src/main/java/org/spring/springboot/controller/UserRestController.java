@@ -74,4 +74,14 @@ public class UserRestController {
     }
 
 
+
+    @RequestMapping(value = "/api/updateUser", method = RequestMethod.GET)
+    public void updateUser() {
+        User user = new User();
+        user.setId(1L);
+        user.setDescription("fads/\''");
+        user.setDatas("{}");
+        userService.updateUser(user);
+    }
+
 }
