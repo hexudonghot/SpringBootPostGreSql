@@ -54,17 +54,19 @@ public class UserRestController {
 
     @RequestMapping(value = "/api/getUserCursor", method = RequestMethod.GET)
     public void getUserCursor() {
-        while (true)
-        {
-            try
-            {
-                Thread.sleep(3000L);
-            } catch (InterruptedException e)
-            {
-                e.printStackTrace();
-            }
-            System.out.println(userService.getUserById("",1L).getSetting());
-        }
+//        while (true)
+//        {
+//            try
+//            {
+//                Thread.sleep(3000L);
+//            } catch (InterruptedException e)
+//            {
+//                e.printStackTrace();
+//            }
+//            System.out.println(userService.getUserById("",1L).getSetting());
+//        }
+
+        userService.getUserCursor();
     }
     @RequestMapping(value = "/api/kafka", method = RequestMethod.GET)
     public void kafka() {

@@ -23,7 +23,7 @@
 
 
 
-	<select id="getUserCursor" fetchSize="100" resultMap="BaseResultMap">
+	<select id="getUserCursor" fetchSize="2" resultMap="BaseResultMap">
 		select <include refid="Base_Column_List" />  from public.user
 	</select>
 
